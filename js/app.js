@@ -34,5 +34,27 @@ document.addEventListener('DOMContentLoaded', () => {
        // keypath = index
 
        objectStore.createIndex('pet', 'pet', {unique : false} );
+       objectStore.createIndex('client', 'client', {unique : false} );
+       objectStore.createIndex('phone', 'phone', {unique : false} );
+       objectStore.createIndex('date', 'date', {unique : false} );
+       objectStore.createIndex('time', 'time', {unique : false} );
+       objectStore.createIndex('symptoms', 'symptoms', {unique : false} );
+    }
+
+    form.addEventListener('submit', addData);
+    
+    function addData(e){
+        e.preventDefault();
+
+        const newDate = {
+            pet: namePet.value,
+            client: nameClient.value,
+            phone: phone.value,
+            date: date.value,
+            time: TimeRanges.value,
+            symptoms: symptoms.value
+        }
+        console.log(newDate);
+
     }
 })
