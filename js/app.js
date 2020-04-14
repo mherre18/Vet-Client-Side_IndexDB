@@ -9,3 +9,18 @@ const time = document.querySelector('#time');
 const symptoms = document.querySelector('#symptoms');
 const dates = document.querySelector('#dates');
 const headinAdmin = document.querySelector('#admin');
+
+document.addEventListener('DOMContentLoaded', () => {
+    let createDB = window.indexedDB.open('dates', 1);
+
+    createDB.onerror = function() {
+        console.log('Something went wrong');
+    }
+
+    createDB.onsuccess = function() {
+        console.log('ok');
+
+        DB = createDB.result;
+        console.log(DB);
+    }
+})
