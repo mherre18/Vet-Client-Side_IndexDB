@@ -51,10 +51,30 @@ document.addEventListener('DOMContentLoaded', () => {
             client: nameClient.value,
             phone: phone.value,
             date: date.value,
-            time: TimeRanges.value,
+            time: time.value,
             symptoms: symptoms.value
         }
-        console.log(newDate);
+        //console.log(newDate);
+
+        //we use transactions
+
+        let transaction = DB.transaction(['dates'], 'readwrite');
+        let objectStore = transaction.objectStore('dates');
+        //console.log(objectStore);
+
+        let request = objectStore.add(newDate);
+
+        request.onsuccess = () => {
+            form.reset();
+        }
+
+        transaction.oncomplete = () => {
+            console.log('Date upgraded');
+        }
+
+        transaction.onerror = () => {
+            console.log('Oh no :(');
+        }
 
     }
 })
