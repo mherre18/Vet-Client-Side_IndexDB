@@ -18,9 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createDB.onsuccess = function() {
-        console.log('ok');
+       // console.log('ok');
 
         DB = createDB.result;
-        console.log(DB);
+       // console.log(DB);
+    }
+
+    //only runs ONCE
+
+    createDB.onupgradeneeded = function(e){
+        //It runs the data base itself!
+        let db = e.target.result;
+
+        let objectStore = db.createObjectStore('dates', {keyPath: 'key', autoIncrement: true} );
+       // keypath = index
+
+       objectStore.createIndex('pet', 'pet', {unique : false} );
     }
 })
