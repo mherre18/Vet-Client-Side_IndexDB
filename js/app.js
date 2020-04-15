@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         transaction.oncomplete = () => {
             console.log('Date upgraded');
+            showDates();
         }
 
         transaction.onerror = () => {
@@ -97,6 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 dateHTML.innerHTML = `
                 <p class="font-weigth-bold">Pet: <span class="font-weight-normal">${cursor.value.pet}</span></p>
+                <p class="font-weigth-bold">Client: <span class="font-weight-normal">${cursor.value.client}</span></p>
+                <p class="font-weigth-bold">Phone: <span class="font-weight-normal">${cursor.value.phone}</span></p>
+                <p class="font-weigth-bold">Date: <span class="font-weight-normal">${cursor.value.date}</span></p>
+                <p class="font-weigth-bold">Time: <span class="font-weight-normal">${cursor.value.time}</span></p>
+                <p class="font-weigth-bold">Symptoms: <span class="font-weight-normal">${cursor.value.symptoms}</span></p>
                 `;
 
                 dates.appendChild(dateHTML);
