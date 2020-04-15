@@ -8,7 +8,7 @@ const date = document.querySelector('#date');
 const time = document.querySelector('#time');
 const symptoms = document.querySelector('#symptoms');
 const dates = document.querySelector('#dates');
-const headinAdmin = document.querySelector('#admin');
+const headingAdmin = document.querySelector('#admin');
 
 document.addEventListener('DOMContentLoaded', () => {
     let createDB = window.indexedDB.open('dates', 1);
@@ -107,6 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 dates.appendChild(dateHTML);
                 cursor.continue();
+            } else {
+            if(!dates.firstChild) {
+                headingAdmin.textContent = 'Add dates to start';
+                let list = document.createElement('p');
+                list.classList.add('text-center'); // bootstrap
+                list.textContent = 'There is no registers';
+                dates.appendChild(list);
+            } else {
+                headingAdmin.textContent = 'Take a look to your dates';
+            }
             }
         }
     }
