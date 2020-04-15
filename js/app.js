@@ -105,6 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="font-weigth-bold">Symptoms: <span class="font-weight-normal">${cursor.value.symptoms}</span></p>
                 `;
 
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete', 'btn', 'btn-danger');
+                deleteButton.innerHTML = '<span aria-hidden="true">X</span> Delete';
+                deleteButton.onclick = deleteDate;
+                dateHTML.appendChild(deleteButton);
+
                 dates.appendChild(dateHTML);
                 cursor.continue();
             } else {
@@ -120,4 +126,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    function deleteDate(e){
+        let dateID = Number(e.target.parentElement.getAttribute('data-date-id')) ;
+
+        let transaction = DB.transaction(['dates'], 'readwrite');
+        let objectStore = transaction.objectStore('dates');
+        //console.log(objectStore);
+
+        let request = objectStore.delete(dateID);
+
+        transaction.oncomplete = () => {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+            console.log(`Date deleted ID number: ${dateID}`);
+
+            if(!dates.firstChild) {
+                headingAdmin.textContent = 'Add dates to start';
+                let list = document.createElement('p');
+                list.classList.add('text-center'); // bootstrap
+                list.textContent = 'There is no registers';
+                dates.appendChild(list);
+            } else {
+                headingAdmin.textContent = 'Take a look to your dates';
+            }
+        }
+    }
+    
+        
+    
 })
