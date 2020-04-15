@@ -19,3 +19,20 @@ html {
 textarea {
     height: 200px!important;
 }
+
+.list-dates .media {
+  border-bottom: 1px solid #e1e1e1;
+  padding-bottom: 3rem;
+}
+
+.list-dates .media-body p {
+  margin: 0;
+}
+
+.list-dates .media-body button {
+  margin-top: 1rem!important;
+}
+
+.list-dates .media-body span {
+  font-weight: bold;
+}
