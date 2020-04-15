@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         DB = createDB.result;
        // console.log(DB);
+
+       showDates();
     }
 
     //only runs ONCE
@@ -76,5 +78,30 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Oh no :(');
         }
 
+    }
+
+    function showDates() {
+        while(dates.firstChild) {
+            dates.removeChild(dates.firstChild);
+        }
+
+        let objectStore = DB.transaction('dates').objectStore('dates');
+
+        objectStore.openCursor().onsuccess = function(e) {
+            let cursor = e.target.result;
+
+            if(cursor) {
+                let dateHTML = document.createElement('li');
+                dateHTML.setAttribute('data-date-id', cursor.value.key);
+                dateHTML.classList.add('list-group-item'); // bootstrap
+
+                dateHTML.innerHTML = `
+                <p class="font-weigth-bold">Pet: <span class="font-weight-normal">${cursor.value.pet}</span></p>
+                `;
+
+                dates.appendChild(dateHTML);
+                cursor.continue();
+            }
+        }
     }
 })
